@@ -10,6 +10,11 @@ import com.google.android.gms.wearable.WearableListenerService;
 
 public class MyService extends WearableListenerService {
     public MyService() {
+        try {
+            Class.forName("android.os.AsyncTask");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -18,7 +23,7 @@ public class MyService extends WearableListenerService {
     }
 
     private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 }
