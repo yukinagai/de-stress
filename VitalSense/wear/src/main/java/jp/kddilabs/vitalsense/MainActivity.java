@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends Activity {
     private final String TAG = "Wear";
+    private String DevName = "";
     private TextView mTextView;
     private SensorManager mSensorManager;
     private Sensor mHeartRateSensor;
@@ -32,10 +33,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        DevName = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE).getName();
+
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
                 mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
                 mSensorManager.registerListener(mHeartListener, mHeartRateSensor, 3);
 
@@ -60,6 +64,7 @@ public class MainActivity extends Activity {
         public void onSensorChanged(SensorEvent event) {
             String valStr = String.valueOf(event.values[0]);
             mTextView.setText(valStr);
+            valStr = DevName+"/heartrate/"+valStr;
             sendMessage(mActivity, valStr);
         }
 
