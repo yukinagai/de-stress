@@ -17,3 +17,5 @@
 //= require d3.min
 //= require bootstrap.min
 //= require c3.min
+//= require amcharts
+//= require serial

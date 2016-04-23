@@ -17,6 +17,16 @@
  */
 
 .top-box {
-  padding: 40px 15px 0 15px;
+  padding: 70px 0 0 0;
   text-align: left;
+}
+
+#am_vital {
+	width: 100%;
+	height: 400px;
+}
+
+#am_bath {
+	width: 100%;
+	height: 400px;
 }

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'vital/:device/:sensor/:value' => "vital#report"
   get 'bath/:sensor/:value' => "bath#report"
-  
+  get ':controller/:action(/:id)'
  #
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

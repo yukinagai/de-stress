@@ -1,94 +1,205 @@
-    <div class="container">
+<div class="container">
+	<div class="row">
+	    <div class="top-box col-sm-6">
+	        <h2>Vital</h2>
+			<div id="am_vital">
 
-      <div class="top-box">
-        <h2>Vital</h2>
-        <div class='chart'>
-			<div id='vital'></div>
-		</div>
-        <p class="lead">
-        	<script type="text/javascript">
-        		var chart = c3.generate({
-					bindto: '#vital',
-					data: {
-					    x: 'x',
-					    xFormat: '%Y/%m/%d %H:%M:%S', // 'xFormat' can be used as custom format of 'x'
-					    columns: [
+			</div>
 
-					    	['x'
-				        	<% @heartrates.each do |heartrate| %>
-				        		,'<%= heartrate.created_at.to_formatted_s(:simple) %>'
-				        	<% end %>],
+			<p class="lead">
+			<script type="text/javascript">
+			var prev_id = -1;
+			var chartData = generateChartData();
 
-					    	['heartrate'
-				        	<% @heartrates.each do |heartrate| %>
-				        		,'<%= heartrate.value %>'
-				        	<% end %>]
-					    ]
+			var chart = AmCharts.makeChart("am_vital", {
+			    "type": "serial",
+			    "theme": "light",
+			    "marginRight": 80,
+			    "dataProvider": chartData,
+			    "valueAxes": [{
+			        "position": "left",
+			        "title": "Vital"
+			    }],
+			    "graphs": [{
+			        "id": "g1",
+			        //"fillAlphas": 0.4,
+			        "valueField": "value",
+			        "balloonText": "<div style='margin:5px; font-size:19px;'>[[value]]</div>",
+					"balloon":{
+						"drop":true,
+						"adjustBorderColor":false,
+						"color":"#ffffff"
 					},
-					axis: {
-					    x: {
-					        type: 'timeseries',
-					        tick: {
-					            format: '%H:%M:%S',
-					            rotate: 75
-					        }
-					    },
-					    y: {
-					    	min: 60,
-					    	max: 120
-					    }
-					}
+			    }],
+			    "chartScrollbar": {
+			        "graph": "g1",
+			        "scrollbarHeight": 80,
+			        "backgroundAlpha": 0,
+			        "selectedBackgroundAlpha": 0.1,
+			        "selectedBackgroundColor": "#888888",
+			        "graphFillAlpha": 0,
+			        "graphLineAlpha": 0.5,
+			        "selectedGraphFillAlpha": 0,
+			        "selectedGraphLineAlpha": 1,
+			        "autoGridCount": true,
+			        "color": "#AAAAAA"
+			    },
+			    "chartCursor": {
+			        "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
+			        "cursorPosition": "mouse"
+			    },
+			    "categoryField": "date",
+			    "categoryAxis": {
+			        "minPeriod": "ss",
+			        "parseDates": true
+			    },
+			    "export": {
+			        "enabled": true,
+			         "dateFormat": "YYYY-MM-DD HH:NN:SS"
+			    }
+			});
+
+			chart.pathToImages = "assets/images/";
+			chart.addListener("dataUpdated", zoomChart);
+			zoomChart();
+			function zoomChart() {
+			    chart.zoomToIndexes(chartData.length - 250, chartData.length);
+			}
+
+			function generateChartData() {
+			    var chartData = [];
+
+			    <% @heartrates.each do |heartrate| %>
+			    	chartData.push({
+			    		date: '<%= heartrate.created_at.to_formatted_s(:simple) %>',
+			    		value: <%= heartrate.value %>
+			    	});
+			    	//prev_id = 170;
+			    <% end %>
+			    return chartData;
+			}
+
+			setInterval(function () {
+				$.getJSON("/main/vital", {"prev_id": prev_id},function(json){
+					console.log(json);
+					if(json.length == 0)
+						return;
+
+					$.each(json, function(){
+						chartData.push({
+				    		date: this.formatted_date,
+				    		value: this.value
+						});
+						prev_id = this.id;
+					});
+					chart.validateData();
 				});
+			}, 5000);
+			</script>
+			</p>
+	    </div>
 
-        	</script>
-        </p>
-      </div>
 
 
-      <div class="top-box">
-        <h2>Bath</h2>
-        <div class='chart'>
-			<div id='bath'></div>
-		</div>
-        <p class="lead">
-        	<script type="text/javascript">
-        		var chart = c3.generate({
-					bindto: '#bath',
-					data: {
-					    x: 'x',
-					    xFormat: '%Y/%m/%d %H:%M:%S', // 'xFormat' can be used as custom format of 'x'
-					    columns: [
 
-					    	['x'
-				        	<% @temperatures.each do |temp| %>
-				        		,'<%= temp.created_at.to_formatted_s(:simple) %>'
-				        	<% end %>],
 
-					    	['heartrate'
-				        	<% @temperatures.each do |temp| %>
-				        		,'<%= temp.value %>'
-				        	<% end %>]
-					    ]
+	    <div class="top-box col-sm-6">
+	        <h2>Bath</h2>
+			<div id="am_bath">
+
+			</div>
+
+			<p class="lead">
+			<script type="text/javascript">
+			var prev_id = -1;
+			var chartData = generateChartData();
+
+			var chart = AmCharts.makeChart("am_bath", {
+			    "type": "serial",
+			    "theme": "light",
+			    "marginRight": 80,
+			    "dataProvider": chartData,
+			    "valueAxes": [{
+			        "position": "left",
+			        "title": "Bath"
+			    }],
+			    "graphs": [{
+			        "id": "g1",
+			        //"fillAlphas": 0.4,
+			        "valueField": "value",
+			        "balloonText": "<div style='margin:5px; font-size:19px;'>[[value]]</div>",
+					"balloon":{
+						"drop":true,
+						"adjustBorderColor":false,
+						"color":"#ffffff"
 					},
-					axis: {
-					    x: {
-					        type: 'timeseries',
-					        tick: {
-					            format: '%H:%M:%S',
-					            rotate: 75
-					        }
-					    },
-					    y: {
-					    	min: 20,
-					    	max: 40
-					    }
-					}
+			    }],
+			    "chartScrollbar": {
+			        "graph": "g1",
+			        "scrollbarHeight": 80,
+			        "backgroundAlpha": 0,
+			        "selectedBackgroundAlpha": 0.1,
+			        "selectedBackgroundColor": "#888888",
+			        "graphFillAlpha": 0,
+			        "graphLineAlpha": 0.5,
+			        "selectedGraphFillAlpha": 0,
+			        "selectedGraphLineAlpha": 1,
+			        "autoGridCount": true,
+			        "color": "#AAAAAA"
+			    },
+			    "chartCursor": {
+			        "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
+			        "cursorPosition": "mouse"
+			    },
+			    "categoryField": "date",
+			    "categoryAxis": {
+			        "minPeriod": "ss",
+			        "parseDates": true
+			    },
+			    "export": {
+			        "enabled": true,
+			         "dateFormat": "YYYY/MM/DD HH:NN:SS"
+			    }
+			});
+
+			chart.pathToImages = "assets/images/";
+			chart.addListener("dataUpdated", zoomChart);
+			zoomChart();
+			function zoomChart() {
+			    chart.zoomToIndexes(chartData.length - 120, chartData.length);
+			}
+
+			function generateChartData() {
+			    var chartData = [];
+
+			    <% @temperatures.each do |temp| %>
+			    	chartData.push({
+			    		date: '<%= temp.created_at.to_formatted_s(:simple) %>',
+			    		value: <%= temp.value %>
+			    	});
+			    	//prev_id = 170;
+			    <% end %>
+			    return chartData;
+			}
+
+			setInterval(function () {
+				$.getJSON("/main/bath", {"prev_id": prev_id},function(json){
+					console.log(json);
+					if(json.length == 0)
+						return;
+
+					$.each(json, function(){
+						chartData.push({
+				    		date: this.formatted_date,
+				    		value: this.value
+						});
+						prev_id = this.id;
+					});
+					chart.validateData();
 				});
-
-        	</script>
-        </p>
-      </div>
-
-
-
-    </div>
+			}, 5000);
+			</script>
+			</p>
+	    </div>
+	</div>
+</div>
