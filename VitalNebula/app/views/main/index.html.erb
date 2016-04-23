@@ -1,13 +1,14 @@
     <div class="container">
 
       <div class="top-box">
-        <h1>Vital</h1>
+        <h2>Vital</h2>
         <div class='chart'>
-			<div id='chart'></div>
+			<div id='vital'></div>
 		</div>
         <p class="lead">
         	<script type="text/javascript">
         		var chart = c3.generate({
+					bindto: '#vital',
 					data: {
 					    x: 'x',
 					    xFormat: '%Y/%m/%d %H:%M:%S', // 'xFormat' can be used as custom format of 'x'
@@ -42,5 +43,52 @@
         	</script>
         </p>
       </div>
+
+
+      <div class="top-box">
+        <h2>Bath</h2>
+        <div class='chart'>
+			<div id='bath'></div>
+		</div>
+        <p class="lead">
+        	<script type="text/javascript">
+        		var chart = c3.generate({
+					bindto: '#bath',
+					data: {
+					    x: 'x',
+					    xFormat: '%Y/%m/%d %H:%M:%S', // 'xFormat' can be used as custom format of 'x'
+					    columns: [
+
+					    	['x'
+				        	<% @temperatures.each do |temp| %>
+				        		,'<%= temp.created_at.to_formatted_s(:simple) %>'
+				        	<% end %>],
+
+					    	['heartrate'
+				        	<% @temperatures.each do |temp| %>
+				        		,'<%= temp.value %>'
+				        	<% end %>]
+					    ]
+					},
+					axis: {
+					    x: {
+					        type: 'timeseries',
+					        tick: {
+					            format: '%H:%M:%S',
+					            rotate: 75
+					        }
+					    },
+					    y: {
+					    	min: 20,
+					    	max: 40
+					    }
+					}
+				});
+
+        	</script>
+        </p>
+      </div>
+
+
 
     </div>

@@ -15,7 +15,8 @@
  *= require bootstrap.min
  *= require c3.min
  */
+
 .top-box {
-  padding: 40px 15px;
+  padding: 40px 15px 0 15px;
   text-align: left;
 }
