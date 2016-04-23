@@ -9,8 +9,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jp.kddilabs.vitalsense.MainActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Service"
+        android:id="@+id/StartButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Service"
+        android:id="@+id/StopButton"
+        android:layout_below="@+id/StartButton"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView"
+        android:layout_below="@+id/StopButton"
+        android:layout_alignEnd="@+id/StopButton"
+        android:layout_marginTop="36dp" />
 </RelativeLayout>
