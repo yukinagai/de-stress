@@ -1,8 +1,6 @@
 package jp.kddilabs.vitalsense;
 
-import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,20 +9,14 @@ import com.google.android.gms.wearable.WearableListenerService;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -50,6 +42,7 @@ import javax.net.ssl.X509TrustManager;
 public class MyService extends WearableListenerService {
     private String Server_UrlBase = "http://157.7.242.70/vital/";
     private DefaultHttpClient httpClient;
+    private boolean startFlag = false;
 
     public MyService() {
         try {
@@ -64,7 +57,13 @@ public class MyService extends WearableListenerService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //setup_httpclient();
+        startFlag = true;
         return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        startFlag = false;
     }
 
     private void setup_httpclient() {
@@ -73,12 +72,11 @@ public class MyService extends WearableListenerService {
 
         //接続確立のタイムアウトを設定（単位：ms）
         HttpConnectionParams.setConnectionTimeout(httpParams, 30000);    // 30秒
-        //接続後のタイムアウトを設定（単位：ms）
-        HttpConnectionParams.setSoTimeout(httpParams, 30000);    // 30秒
     }
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
+        if (! startFlag) return;
         showToast(messageEvent.getPath());
         HttpGet httpGet = new HttpGet(Server_UrlBase+messageEvent.getPath());
         try {
@@ -86,6 +84,7 @@ public class MyService extends WearableListenerService {
             HttpResponse response = httpClient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
+            setup_httpclient();
         }
     }
 
