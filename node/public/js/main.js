@@ -14,10 +14,17 @@ function checkPage(){
   xhr.open('GET',"../check/page",true);
   xhr.onreadystatechange = function(){
     if(xhr.readyState === 4 && xhr.status === 200){
-      msg = xhr.responseText;
-      console.log(msg);
-      if(currentPage != msg){
-        switch(msg){
+      console.log(xhr.responseText);
+      var json = JSON.parse(xhr.responseText);
+      console.log(json);
+      if(json.power){
+        $('#fanpower').html(json.power);
+      }
+      if(json.temp){
+        $('#temperature').html(json.temp);
+      }
+      if(json.page != currentPage){
+        switch(json.page){
           case "fan":
             window.location.href = "./index.html#page/slide1";
             break;

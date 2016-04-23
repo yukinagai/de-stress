@@ -10,18 +10,27 @@
         <script src="js/jquery.fullPage.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <style type="text/css">
-.section {
-background-image: url(img/bg.jpg);
-background-size: cover;
-}
-.panel {
-background-color: rgba(255,255,255,0.8);
-height: 400px;
-width: 740px;
-padding: 40px;
-margin: 0 auto;
-box-shadow: 0 0 25px rgba(0,0,0,0.1);
-}
+            .section {
+            background-image: url(img/bg.jpg);
+            background-size: cover;
+            }
+            .panel {
+            background-color: rgba(255,255,255,0.8);
+            height: 400px;
+            width: 740px;
+            padding: 60px;
+            margin: 0 auto;
+            box-shadow: 0 0 25px rgba(0,0,0,0.1);
+            }
+            h2{
+                font-size: 48px;
+                margin: 0px;
+            }
+            p {
+                font-size: 120px;
+                margin-top: 48px;
+                text-align: center
+            }
         </style>
     </head>
     <body>
@@ -29,14 +38,14 @@ box-shadow: 0 0 25px rgba(0,0,0,0.1);
             <div class="section">
                 <div class="slide" data-anchor="slide1">
                     <div class="panel">
-                        <h2>FAN</h2>
-                        <p>Power</p>
+                        <h2>FAN POWER</h2>
+                        <p id="fanpower">power</p>
                     </div>
                 </div>
                 <div class="slide" data-anchor="slide2">
                     <div class="panel">
                         <h2>TEMPERATURE</h2>
-                        <p>temperature</p>
+                        <p id="temperature">temp</p>
                     </div>
                 </div>
             </div>
