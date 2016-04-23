@@ -1,4 +1,5 @@
-var http = require('http');
+var http = require('http'),
+  fs =require('fs');
 //var request = require('request');
 var serialport = require('serialport');
 
@@ -15,9 +16,7 @@ var sp = new serialport.SerialPort(portName, {
 
 
 
-
-
-
+var currentPage = "fan";
 
 
 sp.on("open",function(){
@@ -49,20 +48,57 @@ sp.on("open",function(){
 	  for(var i in param){
 	  	console.log(param[i]);
 	  }
-	  if(param.length == 3){
+	  if(param.length >= 3){
 	  	switch(param[1]){
   	  	case "motor":
   	  	  motorDrive(param[2]);
+          res.end("success");
   	  	  break;
+        case "page":
+          if(param[2]=="fan"){
+            currentPage = "fan";
+            res.end("success");
+          }else if(param[2]=="temp"){
+            currentPage = "temp";
+            res.end("success");
+          }else{
+            res.end("wrong param");
+          }
+          break;
+        case "check":
+          if(param[2]=="page"){
+            res.end(currentPage);
+          }else{
+            res.end("wrong param");
+          }
+          break;
+        case "public":
+          console.log("public");
+          fs.readFile(__dirname + urlinfo.pathname, 'utf-8', function(err, data){
+            if(err){　//err=trueならNot Foundを返します。
+              res.writeHead(404, {'Content-Type': 'text/plain'});
+              res.write("Not Found");
+              return res.end();　
+            }
+            var contenttype = urlinfo.pathname.split(".");
+            if(contenttype[contenttype.length - 1] == "css"){
+              res.writeHead(200, {'Content-Type': 'text/css'});　//htmlファイルなんでhtml
+            }else{
+              res.writeHead(200, {'Content-Type': 'text/html'});　//htmlファイルなんでhtml
+            }
+            res.write(data);
+            res.end();
+          });
+          break;
   		  default:
   		    break;
   	  }
 	  }else{
-	  	console.log("wrong parameter");
+	  	res.end("wrong parameter");
 	  }
 	  
 
-	  res.end('Hello World\n');
+	  //res.end('Hello World\n');
 	}).listen(8001);
   
 });
