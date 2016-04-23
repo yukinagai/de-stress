@@ -21,6 +21,7 @@ var currentPower = 0;
 var currentTemp = 0;
 var currentStatus;
 
+var pageChenge = false;
 
 
 sp.on("open",function(){
@@ -71,14 +72,22 @@ sp.on("open",function(){
           }
           break;
         case "page":
-          if(param[2]=="fan"){
-            currentPage = "fan";
-            res.end("success");
-          }else if(param[2]=="temp"){
-            currentPage = "temp";
-            res.end("success");
+          if(!pageChenge){
+            if(param[2]=="fan"){
+              currentPage = "fan";
+              res.end("success");
+            }else if(param[2]=="temp"){
+              currentPage = "temp";
+              res.end("success");
+            }else{
+              res.end("wrong param");
+            }
+            pageChenge = true;
+            setTimeout(function(){
+              pageChenge = false;
+            },3000);
           }else{
-            res.end("wrong param");
+            res.end("page changing");
           }
           break;
         case "check":
