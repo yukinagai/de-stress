@@ -48,14 +48,17 @@ sp.on("open",function(){
 	                      'Access-Control-Allow-Origin' : '*'});
 
 	  var urlinfo = require('url').parse( req.url , true );
-	  console.log( urlinfo );
+	  //console.log( urlinfo );
 	  var param = urlinfo.pathname.split("/");
-	  for(var i in param){
+	  /*
+    for(var i in param){
 	  	console.log(param[i]);
 	  }
+    */
 	  if(param.length >= 3){
 	  	switch(param[1]){
   	  	case "motor":
+          console.log("############ motor speed change ########### ");
           currentPower = param[2];
   	  	  motorDrive(param[2]);
           res.end("success");
@@ -74,9 +77,11 @@ sp.on("open",function(){
         case "page":
           if(!pageChenge){
             if(param[2]=="fan"){
+              console.log("############ fan page ########### ");
               currentPage = "fan";
               res.end("success");
             }else if(param[2]=="temp"){
+              console.log("############ temp page ########### ");
               currentPage = "temp";
               res.end("success");
             }else{
@@ -102,7 +107,7 @@ sp.on("open",function(){
           }
           break;
         case "public":
-          console.log("public");
+          //console.log("public");
           fs.readFile(__dirname + urlinfo.pathname, 'utf-8', function(err, data){
             if(err){　//err=trueならNot Foundを返します。
               res.writeHead(404, {'Content-Type': 'text/plain'});
@@ -140,9 +145,9 @@ function motorDrive(power){
 }
 
 function sendTemp(temp){
-  console.log("temparature:"+temp);
+  //console.log("temparature:"+temp);
   var url = "http://157.7.242.70/bath/temperature/"+temp;
-  console.log(url);
+  //console.log(url);
   http.get(url, function(res) {
 
     var body = '';
@@ -154,7 +159,7 @@ function sendTemp(temp){
 
     res.on('end', function() {
         ret = JSON.parse(body);
-        console.log(body);
+        //console.log(body);
     });
 
   }).on('error', function(e) {
@@ -165,9 +170,6 @@ function sendTemp(temp){
 sp.on('data', function(data) {
   console.log('data received: ' + data);
   var param = data.split("/");
-  for(var i in param){
-    console.log(param[i]);
-  }
   if(param.length == 2){
     switch(param[0]){
       case "temperature":
