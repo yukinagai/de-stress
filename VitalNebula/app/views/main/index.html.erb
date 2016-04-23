@@ -1,0 +1,46 @@
+    <div class="container">
+
+      <div class="top-box">
+        <h1>Vital</h1>
+        <div class='chart'>
+			<div id='chart'></div>
+		</div>
+        <p class="lead">
+        	<script type="text/javascript">
+        		var chart = c3.generate({
+					data: {
+					    x: 'x',
+					    xFormat: '%Y/%m/%d %H:%M:%S', // 'xFormat' can be used as custom format of 'x'
+					    columns: [
+
+					    	['x'
+				        	<% @heartrates.each do |heartrate| %>
+				        		,'<%= heartrate.created_at.to_formatted_s(:simple) %>'
+				        	<% end %>],
+
+					    	['heartrate'
+				        	<% @heartrates.each do |heartrate| %>
+				        		,'<%= heartrate.value %>'
+				        	<% end %>]
+					    ]
+					},
+					axis: {
+					    x: {
+					        type: 'timeseries',
+					        tick: {
+					            format: '%H:%M:%S',
+					            rotate: 75
+					        }
+					    },
+					    y: {
+					    	min: 60,
+					    	max: 120
+					    }
+					}
+				});
+
+        	</script>
+        </p>
+      </div>
+
+    </div>
