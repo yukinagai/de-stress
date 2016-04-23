@@ -19,6 +19,8 @@ var sp = new serialport.SerialPort(portName, {
 var currentPage = "fan";
 var currentPower = 0;
 var currentTemp = 0;
+var currentStatus;
+
 
 
 sp.on("open",function(){
@@ -57,6 +59,17 @@ sp.on("open",function(){
   	  	  motorDrive(param[2]);
           res.end("success");
   	  	  break;
+        case "temp":
+          if(param[2]=="up"){
+            currentStatus="tempup";
+            res.end("success");
+          }else if(param[2]=="down"){
+            currentStatus="tempdown";
+            res.end("success");
+          }else{
+            res.end("wrong param");
+          }
+          break;
         case "page":
           if(param[2]=="fan"){
             currentPage = "fan";
@@ -72,8 +85,9 @@ sp.on("open",function(){
 
           if(param[2]=="page"){
             //var json = '{"page":'+currentPage+',"power":'+currentPower+',"temp":'+currentTemp+'}';
-            var json = {page:currentPage,power:currentPower,temp:currentTemp};
+            var json = {page:currentPage,power:currentPower,temp:currentTemp,status:currentStatus};
             res.end(JSON.stringify(json));
+            currentStatus = null;
           }else{
             res.end("wrong param");
           }
