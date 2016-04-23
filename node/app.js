@@ -1,4 +1,5 @@
 var http = require('http');
+//var request = require('request');
 var serialport = require('serialport');
 
 var portName = '/dev/cu.usbmodem1411'; 
@@ -73,8 +74,44 @@ function motorDrive(power){
   sp.write(buffer);
 }
 
+function sendTemp(temp){
+  console.log("temparature:"+temp);
+  var url = "http://157.7.242.70/bath/temperature/"+temp;
+  console.log(url);
+  http.get(url, function(res) {
+
+    var body = '';
+    res.setEncoding('utf8');
+
+    res.on('data', function(chunk) {
+        body += chunk;
+    });
+
+    res.on('end', function() {
+        ret = JSON.parse(body);
+        console.log(body);
+    });
+
+  }).on('error', function(e) {
+      console.log(e.message);
+  });
+}
+
 sp.on('data', function(data) {
   console.log('data received: ' + data);
+  var param = data.split("/");
+  for(var i in param){
+    console.log(param[i]);
+  }
+  if(param.length == 2){
+    switch(param[0]){
+      case "temperature":
+          sendTemp(param[1]);
+        break;
+      default:
+        break;
+    }
+  }
 });
 
 
