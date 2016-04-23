@@ -11,3 +11,10 @@
 * Arduinoから温度が通知されると、サーバーに温度を送る
 * http://157.7.242.70/bath/temperature/39.5
 
+
+## ページ操作
+* http://localhost:8001/page/fan
+* プロペラ操作ページへ遷移 
+* http://localhost:8001/page/temp
+* 温度操作ページへ遷移
+
