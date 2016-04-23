@@ -3,6 +3,7 @@ package jp.kddilabs.vitalsense;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.wearable.MessageEvent;
@@ -47,7 +48,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class MyService extends WearableListenerService {
-    private String Server_UrlBase = "http://loclhost:8000/vital/";
+    private String Server_UrlBase = "http://157.7.242.70/vital/";
     private DefaultHttpClient httpClient;
 
     public MyService() {
@@ -58,6 +59,12 @@ public class MyService extends WearableListenerService {
         }
 
         setup_httpclient();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        //setup_httpclient();
+        return START_STICKY;
     }
 
     private void setup_httpclient() {
@@ -75,6 +82,7 @@ public class MyService extends WearableListenerService {
         showToast(messageEvent.getPath());
         HttpGet httpGet = new HttpGet(Server_UrlBase+messageEvent.getPath());
         try {
+            Log.d("HOGE",Server_UrlBase+messageEvent.getPath());
             HttpResponse response = httpClient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();

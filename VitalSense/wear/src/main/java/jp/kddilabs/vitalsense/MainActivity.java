@@ -35,7 +35,8 @@ public class MainActivity extends Activity {
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        DevName = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE).getName();
+        //DevName = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE).getName();
+        DevName = "moto360";
 
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
