@@ -1,6 +1,8 @@
 package jp.kddilabs.vitalsense;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -77,7 +79,14 @@ public class MyService extends WearableListenerService {
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         if (! startFlag) return;
-        showToast(messageEvent.getPath());
+        if (MainActivity.mHandler != null) {
+            Message msg = Message.obtain(MainActivity.mHandler, 1);
+            Bundle data = new Bundle();
+            data.putString("value", messageEvent.getPath());
+            msg.setData(data);
+            msg.sendToTarget();
+        }
+        //showToast(messageEvent.getPath());
         HttpGet httpGet = new HttpGet(Server_UrlBase+messageEvent.getPath());
         try {
             Log.d("HOGE",Server_UrlBase+messageEvent.getPath());
