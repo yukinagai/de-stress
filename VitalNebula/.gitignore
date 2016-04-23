@@ -20,4 +20,5 @@
 /.bundle
 /vendor/bundle
 
+config/database.yml
 
