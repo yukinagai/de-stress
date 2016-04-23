@@ -1,6 +1,7 @@
 package jp.kddilabs.vitalsense;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -42,8 +43,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class MyService extends WearableListenerService {
+    private final String TAG = "WearMobileService";
     private String Server_UrlBase = "http://157.7.242.70/vital/";
-    private DefaultHttpClient httpClient;
     private boolean startFlag = false;
 
     public MyService() {
@@ -52,8 +53,6 @@ public class MyService extends WearableListenerService {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        setup_httpclient();
     }
 
     @Override
@@ -68,17 +67,10 @@ public class MyService extends WearableListenerService {
         startFlag = false;
     }
 
-    private void setup_httpclient() {
-        httpClient = getHttpClient();
-        HttpParams httpParams = httpClient.getParams();
-
-        //接続確立のタイムアウトを設定（単位：ms）
-        HttpConnectionParams.setConnectionTimeout(httpParams, 30000);    // 30秒
-    }
-
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         if (! startFlag) return;
+        //Log.d(TAG,"onMessageRecieved");
         if (MainActivity.mHandler != null) {
             Message msg = Message.obtain(MainActivity.mHandler, 1);
             Bundle data = new Bundle();
@@ -86,19 +78,44 @@ public class MyService extends WearableListenerService {
             msg.setData(data);
             msg.sendToTarget();
         }
+        NetAccess valSend = new NetAccess();
+        valSend.execute(messageEvent.getPath());
         //showToast(messageEvent.getPath());
-        HttpGet httpGet = new HttpGet(Server_UrlBase+messageEvent.getPath());
-        try {
-            Log.d("HOGE",Server_UrlBase+messageEvent.getPath());
-            HttpResponse response = httpClient.execute(httpGet);
-        } catch (IOException e) {
-            e.printStackTrace();
-            setup_httpclient();
-        }
     }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public class NetAccess extends AsyncTask<String,Integer, Integer> {
+        private DefaultHttpClient httpClient;
+
+        @SuppressWarnings("resource")
+        @Override
+        protected Integer doInBackground(String... params) {
+            //Log.d(TAG,"http access");
+            setup_httpclient();
+            HttpGet httpGet = new HttpGet(Server_UrlBase+params[0]);
+            try {
+                Log.d(TAG,Server_UrlBase+params[0]);
+                HttpResponse response = httpClient.execute(httpGet);
+                //Log.d(TAG,String.valueOf(response.getStatusLine().getStatusCode()));
+                httpClient.getConnectionManager().shutdown();
+            } catch (IOException e) {
+                e.printStackTrace();
+                setup_httpclient();
+            }
+            return null;
+        }
+
+        private void setup_httpclient() {
+            httpClient = getHttpClient();
+            HttpParams httpParams = httpClient.getParams();
+
+            //接続確立のタイムアウトを設定（単位：ms）
+            HttpConnectionParams.setConnectionTimeout(httpParams, 30000);    // 30秒
+        }
+
     }
 
     /**
