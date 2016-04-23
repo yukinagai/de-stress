@@ -47,10 +47,16 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class MyService extends WearableListenerService {
-    private String Server_UrlBase = "http://loclhost:8000/";
+    private String Server_UrlBase = "http://loclhost:8000/vital/";
     private DefaultHttpClient httpClient;
 
     public MyService() {
+        try {
+            Class.forName("android.os.AsyncTask");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         setup_httpclient();
     }
 
@@ -62,7 +68,6 @@ public class MyService extends WearableListenerService {
         HttpConnectionParams.setConnectionTimeout(httpParams, 30000);    // 30秒
         //接続後のタイムアウトを設定（単位：ms）
         HttpConnectionParams.setSoTimeout(httpParams, 30000);    // 30秒
-
     }
 
     @Override
@@ -77,7 +82,7 @@ public class MyService extends WearableListenerService {
     }
 
     private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     /**
