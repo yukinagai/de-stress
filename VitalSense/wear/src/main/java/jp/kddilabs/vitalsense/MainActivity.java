@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
@@ -35,8 +36,7 @@ public class MainActivity extends Activity {
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        //DevName = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE).getName();
-        DevName = "moto360";
+        DevName = Build.MODEL;
 
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
