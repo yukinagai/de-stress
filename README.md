@@ -1,5 +1,4 @@
-# de-stress app
 ## wearable bath
-## vital monitor
-## gesture ui
-## fan
+* bath suits
+* vital monitor
+* a fan and hands-free controller
