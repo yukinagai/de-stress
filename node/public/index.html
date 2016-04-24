@@ -22,14 +22,27 @@
             margin: 0 auto;
             box-shadow: 0 0 25px rgba(0,0,0,0.1);
             }
+            .up{
+                height: 108.5px;
+                margin-bottom: -24px;
+                font-size: 72px;
+                text-align: center;
+            }
+            .down{
+                height: 108.5px;
+                margin-top: -24px;
+                font-size: 72px;
+                text-align: center;
+            }
             h2{
                 font-size: 48px;
                 margin: 0px;
             }
             p {
                 font-size: 120px;
-                margin-top: 48px;
-                text-align: center
+                margin-top: 0px;
+                margin-bottom: 0px;
+                text-align: center;
             }
         </style>
     </head>
@@ -39,13 +52,17 @@
                 <div class="slide" data-anchor="slide1">
                     <div class="panel">
                         <h2>FAN POWER</h2>
-                        <p id="fanpower">power</p>
+                        <div class="up"> </div>
+                        <p id="fanpower">0</p>
+                        <div class="down"> </div>
                     </div>
                 </div>
                 <div class="slide" data-anchor="slide2">
                     <div class="panel">
                         <h2>TEMPERATURE</h2>
-                        <p id="temperature">temp</p>
+                        <div class="up" id="tempup"></div>
+                        <p id="temperature">0</p>
+                        <div class="down" id="tempdown"></div>
                     </div>
                 </div>
             </div>

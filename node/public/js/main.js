@@ -5,7 +5,7 @@ $(document).ready(function() {
     });
     checkPage();
 });
-
+var Timer=null;
 var currentPage;
 function checkPage(){
   console.log("checkpage");
@@ -22,6 +22,30 @@ function checkPage(){
       }
       if(json.temp){
         $('#temperature').html(json.temp);
+      }
+      if(json.status){
+        switch(json.status){
+          case "tempup":
+            if(!Timer){
+              $('#tempup').html("▲");
+              Timer = setTimeout(function(){
+                $('#tempup').html("");
+                Timer=null;
+              },3000);
+            }
+            break;
+          case "tempdown":
+            if(!Timer){
+              $('#tempdown').html("▼");
+              Timer = setTimeout(function(){
+                $('#tempdown').html("");
+                Timer=null;
+              },3000);
+            }
+            break;
+          default:
+            break;
+        }
       }
       if(json.page != currentPage){
         switch(json.page){
