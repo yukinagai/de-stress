@@ -27,7 +27,7 @@ class MainController < ApplicationController
   end
 
   def alert
-    @heartrates = Vital.where(device: "Moto", sensor: "heartrate").where("created_at > ?", 120.minutes.ago)
-    render :json => (@heartrates.size > 10 && @heartrates.map(&:value).average > 80)
+    @heartrates = Vital.where(device: "Moto", sensor: "heartrate").where("created_at > ?", 1.minutes.ago)
+    render :json => (@heartrates.size > 10 && @heartrates.map(&:value).average > 90)
   end
 end
