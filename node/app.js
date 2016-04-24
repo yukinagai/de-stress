@@ -3,7 +3,7 @@ var http = require('http'),
 //var request = require('request');
 var serialport = require('serialport');
 
-var portName = '/dev/cu.usbmodem1411'; 
+var portName = '/dev/cu.usbmodem1421'; 
 
 var sp = new serialport.SerialPort(portName, {
     baudRate: 115200,
