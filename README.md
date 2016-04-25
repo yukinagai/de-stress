@@ -1,4 +1,5 @@
 ## Wearable Bath
+This system has been developped for Space Apps Challenge 2016 ( https://2016.spaceappschallenge.org/challenges/space-station/rock-it-space-fashion-and-design/projects/wearable-bath ).
 
 ### Explanation
 
