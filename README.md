@@ -24,3 +24,7 @@ The wearable bath consists of bath suits, vital sensors, a fan and hands-free co
 7. Put the suits off
     * The towels with the suits wipe the splash on the body. (Just the behavior of putting off is enough to do so)
     * No splash in room/on the wall
+    * 
+
+### Prototype System Overview
+<img src="https://github.com/yukinagai/de-stress/blob/master/img/system_diagram.bmp" alt="Drawing" style="width: 200px;"/>
