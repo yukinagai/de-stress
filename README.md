@@ -27,4 +27,4 @@ The wearable bath consists of bath suits, vital sensors, a fan and hands-free co
     * 
 
 ## Prototype System Overview
-<img src="https://github.com/yukinagai/de-stress/blob/master/img/system_diagram.bmp" alt="Drawing" style="width: 200px;"/>
+<img src="https://github.com/yukinagai/de-stress/blob/master/img/system_diagram.png" alt="Drawing" style="width: 200px;"/>
