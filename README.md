@@ -1,7 +1,7 @@
 ## Wearable Bath
 This system has been developed for Space Apps Challenge 2016 ( https://2016.spaceappschallenge.org/challenges/space-station/rock-it-space-fashion-and-design/projects/wearable-bath ).
 
-### Mobivation
+### Motivation
 
 There is no bath or shower in the ISS and rockets to Mars. No gravity makes it difficult to drain splash completely, so that water drifts in room and clings on the wall, which is very dangerous for astronauts/cosmonauts and machineries in the rocket. On the other hand, soaking a bath/taking a shower is really good thing for relaxing and, of course, keeping sanitary. Although, wet towel and dry shampoo are used in the ISS, we imagine that it is far from perfect.
 
