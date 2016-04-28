@@ -9,7 +9,17 @@ Our team “de-stress” solves “Rock-It Space Fashion and Design” to care p
 
 ## Explanation
 
-The wearable bath consists of bath suits, vital sensors, a fan and hands-free controller. The bath suits will be silicon or something waterproof and soft materials for full body below neck. It is equipped with pouring/draining/ventilation tubes for hot and warm water and drying the body roughly. The vital information is monitored using sensors to notify when to finish soaking. The fan is for cooling face/head. He/she can control the bath related things (e.g., the temperature of the water) by shaking the head, which is detected by a depth camera. The controller also collects the sensed data to monitor his/her vital status.
+The wearable bath consists of bath suits, vital sensors, a fan and hands-free controller. 
+
+### Bath suits
+The bath suits will be silicon or something waterproof and soft materials for full body below neck. It is equipped with pouring/draining/ventilation tubes for hot and warm water and drying the body roughly. 
+
+**Can anyone add the explanation on the bath suits, especially about double-layered towel?**
+
+### Prototype System Overview
+The system around the bath suite allows a crew to enjoy a bath comfortably and safely. The vital information is monitored using sensors to notify when to finish soaking. The fan is for cooling face/head. He/she can control the bath related things (e.g., the temperature of the water) by shaking the head because he/she cannot use the hand to control the system when soaking in the bath. So, we developed hands-free UI using depth camera.
+
+<img src="https://github.com/yukinagai/de-stress/blob/master/img/system_diagram.png" alt="Drawing" style="width: 200px;"/>
 
 ## How to use
 
@@ -24,7 +34,3 @@ The wearable bath consists of bath suits, vital sensors, a fan and hands-free co
 7. Put the suits off
     * The towels with the suits wipe the splash on the body. (Just the behavior of putting off is enough to do so)
     * No splash in room/on the wall
-    * 
-
-## Prototype System Overview
-<img src="https://github.com/yukinagai/de-stress/blob/master/img/system_diagram.png" alt="Drawing" style="width: 200px;"/>
