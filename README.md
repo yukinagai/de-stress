@@ -11,6 +11,11 @@ Our team “de-stress” solves “Rock-It Space Fashion and Design” to care p
 
 The wearable bath consists of bath suits, vital sensors, a fan and hands-free controller. The bath suits will be silicon or something waterproof and soft materials for full body below neck. It is equipped with pouring/draining/ventilation tubes for hot and warm water and drying the body roughly. The vital information is monitored using sensors to notify when to finish soaking. The fan is for cooling face/head. He/she can control the bath related things (e.g., the temperature of the water) by shaking the head, which is detected by a depth camera. The controller also collects the sensed data to monitor his/her vital status.
 
+#### A fan and hands-free controller
+
+Hands-free controller consists of two raptops, kinect, a motor fan and temperature sensor. A face/head gesture is recognized by kinect connected to a raptop, and then hardware control command will be send to a node server on another raptop via http. The node server send a serial message to the micro controller (arduino micro) to control fan power, water temperture, and so on. A temperature sensor measures and send a temperature value to the node server via serial message, and then the server send the value to the monitoring module via http.
+
+
 ## How to use
 
 1. Put the bath suits on (and may need to wear vital sensors)
