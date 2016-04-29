@@ -11,6 +11,8 @@ Our team “de-stress” solves “Rock-It Space Fashion and Design” to care p
 
 The wearable bath consists of bath suits, vital sensors, a fan and hands-free controller. 
 
+<img src="https://github.com/yukinagai/de-stress/blob/master/img/wearable_bath.png" alt="Drawing" style="width: 150px;"/>
+
 ### Bath suits
 The bath suits will be silicon or something waterproof and soft materials for full body below neck. It is equipped with pouring/draining/ventilation tubes for hot and warm water and drying the body roughly. 
 
