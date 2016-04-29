@@ -25,7 +25,7 @@ The system around the bath suite allows a crew to enjoy a bath comfortably and s
 
 ## How to use
 
-1. Put the bath suits on (and may need to wear vital sensors)
+1. Put on bath suits (and may need to wear vital sensors)
 2. Pour hot/warm water through the tubes.
 3. Enjoy the bath!
     * If you feel hot, the fan will cool down your head
@@ -33,6 +33,6 @@ The system around the bath suite allows a crew to enjoy a bath comfortably and s
 4. The system will notify you of finishing bath
 5. Water in the suits is drained from the tube.
 6. Warm wind blows from the ventilation tubes to dry the body roughly.
-7. Put the suits off
+7. Put off the suits
     * The towels with the suits wipe the splash on the body. (Just the behavior of putting off is enough to do so)
     * No splash in room/on the wall
