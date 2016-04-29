@@ -15,9 +15,7 @@ The wearable bath consists of bath suits, vital sensors, a fan and hands-free co
 <img src="https://github.com/yukinagai/de-stress/blob/master/img/wearable_bath_system.png" alt="system image" width="400"/>
 
 ### Bath suits
-The bath suits will be silicon or something waterproof and soft materials for full body below neck. It is equipped with pouring/draining/ventilation tubes for hot and warm water and drying the body roughly. 
-
-**Can anyone add the explanation on the bath suits, especially about double-layered towel?**
+The bath suits will be silicon or something waterproof and soft materials for full body below neck. It is equipped with pouring/draining/ventilation tubes for hot and warm water and drying the body roughly. To avoid suffocation and overflow from the suits, the suits has a double-layered towel and jet air dryers at round the neck. The air dryers blow about the water streaming up his/her neck. The inner layer of towel equipped inside of the suits wipe up the water not only slipping by the air dryers but also clings to the inside of the suits. The outer layer of towel equipped outside of the suits wipe up the water clings to his/her body when he/she put off the suits.
 
 ### Prototype System Overview
 The system around the bath suite allows a crew to enjoy a bath comfortably and safely. The vital information is monitored using sensors to notify when to finish soaking. The fan is for cooling face/head. He/she can control the bath related things (e.g., the temperature of the water) by shaking the head because he/she cannot use the hand to control the system when soaking in the bath. So, we developed hands-free UI using depth camera.
